@@ -6,13 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-*{box-sizing:border-box;font-family:Arial,sans-serif}
-body{
-  margin:0;
-  background:#000;
-  color:#fff;
-  overflow-x:hidden;
-}
+*{box-sizing:border-box;font-family:Arial,sans-serif;margin:0;padding:0}
+body{background:#000;color:#fff;overflow-x:hidden;}
 
 /* white dots */
 body::before{
@@ -34,129 +29,48 @@ body::before{
   to{background-position:-220px -220px}
 }
 
-/* top banner */
-.banner{
-  background:#fff;
-  color:#000;
-  text-align:center;
-  padding:10px;
-  font-weight:bold;
-}
+/* banner & header */
+.banner{background:#fff;color:#000;text-align:center;padding:10px;font-weight:bold;}
+header{text-align:center;font-size:28px;font-weight:bold;padding:15px;}
 
-/* header */
-header{
-  padding:20px;
-  text-align:center;
-  font-size:32px;
-  font-weight:bold;
-}
-
-/* full screen & cart buttons */
+/* buttons */
 #fullscreenBtn, #toggleCartBtn{
-  position:fixed;
-  top:20px;
-  right:20px;
-  z-index:1000;
-  background:#fff;
-  color:#000;
-  border:none;
-  padding:10px 14px;
-  border-radius:12px;
-  font-weight:bold;
-  cursor:pointer;
-  margin-left:8px;
+  position:fixed;top:15px;right:15px;z-index:1000;
+  background:#fff;color:#000;border:none;padding:8px 12px;border-radius:12px;font-weight:bold;cursor:pointer;
+  font-size:14px;
 }
-#toggleCartBtn{
-  right:140px;
-  position:fixed;
-}
-#cartCount{
-  background:red;
-  color:white;
-  font-size:12px;
-  padding:2px 6px;
-  border-radius:50%;
-  position:absolute;
-  top:-6px;
-  right:-6px;
-}
+#toggleCartBtn{right:120px;position:fixed;}
+#cartCount{background:red;color:white;font-size:12px;padding:2px 6px;border-radius:50%;position:absolute;top:-6px;right:-6px;}
 
-/* layout */
-.container{
-  padding:20px;
-  margin-right:340px;
-}
+/* container */
+.container{padding:15px;margin-top:10px;}
 
-/* sections */
-.section-title{
-  font-size:22px;
-  margin:30px 0 15px;
-}
+/* section titles */
+.section-title{font-size:20px;margin:20px 0 10px;}
 
-/* grid */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-  gap:15px;
-}
+/* card grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100%,1fr));gap:12px;} /* always 1 column for iPhone */
 
-/* card */
-.card{
-  background:#111;
-  border-radius:18px;
-  padding:12px;
-  text-align:center;
-}
-.card img{
-  width:100%;
-  height:140px;
-  object-fit:contain;
-  border-radius:14px;
-}
-.card button{
-  margin-top:8px;
-  width:100%;
-  padding:8px;
-  border:none;
-  border-radius:14px;
-  background:#fff;
-  color:#000;
-  font-weight:bold;
-  cursor:pointer;
-}
+/* cards */
+.card{background:#111;border-radius:14px;padding:12px;text-align:center;}
+.card img{width:100%;height:140px;object-fit:contain;border-radius:10px;}
+.card button{margin-top:8px;width:100%;padding:8px;border:none;border-radius:12px;background:#fff;color:#000;font-weight:bold;cursor:pointer;}
 
-/* cart */
+/* cart panel */
 .cart{
-  position:fixed;
-  top:80px;
-  right:20px;
-  width:300px;
-  max-height:75vh;
-  background:#111;
-  border-radius:18px;
-  padding:16px;
-  overflow-y:auto;
-  box-shadow:0 0 25px rgba(255,255,255,.08);
+  position:fixed;top:60px;right:10px;width:280px;max-height:75vh;
+  background:#111;border-radius:14px;padding:12px;overflow-y:auto;
+  box-shadow:0 0 25px rgba(255,255,255,.1);display:none;
 }
-.cart h3{text-align:center;margin-top:0}
-
-.checkout-btn{
-  width:100%;
-  padding:12px;
-  margin-top:10px;
-  border:none;
-  border-radius:16px;
-  background:#fff;
-  color:#000;
-  font-weight:bold;
-  cursor:pointer;
-}
+.cart h3{text-align:center;margin-top:0;}
+.checkout-btn{width:100%;padding:10px;margin-top:8px;border:none;border-radius:12px;background:#fff;color:#000;font-weight:bold;cursor:pointer;}
+textarea#receiptBox{width:100%;margin-top:8px;height:120px;background:#000;color:#fff;border-radius:12px;padding:8px;border:1px solid #222;font-size:12px;}
 
 /* mobile adjustments */
-@media(max-width:600px){
-  .container{margin-right:0;}
-  .cart{top:60px;right:10px;width:260px;}
-  #fullscreenBtn, #toggleCartBtn{top:10px;right:auto;left:10px;margin-left:0;}
+@media(max-width:480px){
+  .container{margin-right:0;padding:10px;}
+  .cart{width:90%;right:5%;top:70px;}
+  #fullscreenBtn,#toggleCartBtn{top:10px;right:auto;left:10px;margin-left:0;font-size:12px;padding:6px 10px;}
 }
 </style>
 </head>
@@ -173,20 +87,8 @@ header{
   <h3>🛒 Cart</h3>
   <div id="cartItems"></div>
   <p id="cartTotal"></p>
-
   <button class="checkout-btn" onclick="checkoutDiscord()">Checkout via Discord</button>
-
-  <textarea id="receiptBox" readonly style="
-    width:100%;
-    margin-top:10px;
-    height:140px;
-    background:#000;
-    color:#fff;
-    border-radius:14px;
-    padding:10px;
-    border:1px solid #222;
-    font-size:12px;
-  "></textarea>
+  <textarea id="receiptBox" readonly></textarea>
 </div>
 
 <div class="container">
@@ -200,7 +102,7 @@ header{
 <script>
 let cart=[], total=0;
 
-// Full list of pets
+// pets
 let pets=[
 {name:"Strawberry Shortcake Bat Dragon Fly Ride",price:24,img:"https://image2url.com/r2/default/images/1769419915326-9b1f86be-1cf1-47e3-9eac-43f7fb10c8ba.png",stock:4},
 {name:"Cow Fly Ride",price:20,img:"https://image2url.com/r2/default/images/1769419943380-9a948b0d-6c67-40d8-960b-79564c520a19.png",stock:4},
@@ -217,7 +119,7 @@ let pets=[
 {name:"Neon Sneak Weasel (5)",price:12,img:"https://image2url.com/r2/default/images/1769572019588-bb64eee7-b0d3-40cc-9fa6-8a09e3dc8a51.jpg",stock:5}
 ];
 
-// Full list of eggs
+// eggs
 let eggs=[
 {name:"Crystal Egg",price:1,img:"https://image2url.com/r2/default/images/1769418420566-8274a492-a6e0-42d4-a4c8-018c13c65bae.png",stock:15},
 {name:"Retired Egg",price:2,img:"https://image2url.com/r2/default/images/1769419815185-0d947ffd-f776-439d-9ae8-369f4da2547f.png",stock:15},
@@ -270,30 +172,20 @@ function checkoutDiscord(){
 }
 
 // full screen toggle
-const fsBtn = document.getElementById("fullscreenBtn");
-fsBtn.onclick = ()=>{
-  if(!document.fullscreenElement){
-    document.documentElement.requestFullscreen();
-  }else{
-    document.exitFullscreen();
-  }
+document.getElementById("fullscreenBtn").onclick = ()=>{
+  if(!document.fullscreenElement)document.documentElement.requestFullscreen();
+  else document.exitFullscreen();
 };
 
 // cart toggle
-const cartBtn = document.getElementById("toggleCartBtn");
-const cartPanel = document.getElementById("cartPanel");
-cartBtn.onclick = ()=>{
-  if(cartPanel.style.display==="none" || !cartPanel.style.display){
-    cartPanel.style.display="block";
-  }else{
-    cartPanel.style.display="none";
-  }
+document.getElementById("toggleCartBtn").onclick = ()=>{
+  const cp=document.getElementById("cartPanel");
+  cp.style.display=(cp.style.display==="block")?"none":"block";
 };
 
-// Render all items
+// render
 render(pets,"pets");
 render(eggs,"eggs");
 </script>
-
 </body>
 </html>
